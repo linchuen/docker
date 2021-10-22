@@ -1,0 +1,34 @@
+version: "3.4"
+services:
+  app:
+    # replace imageName with your image name (block in your case)
+    image: eboard
+    container_name: eboard
+    environment:
+      WEB_UPLOAD-PATH: /web/storage/
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_MAIL_USERNAME: ${USERNAME}
+      SPRING_MAIL_PASSWORD: ${PASSWORD}
+    networks: 
+      - my-network
+    ports:
+      - 8080:8080 # Replace the port of your application here if used
+    depends_on: 
+      - db
+  db:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - data-volume:/data/db
+    networks: 
+      - my-network
+    ports:
+      - 27017:27017 
+networks:
+  my-network:
+    external:
+      name: forweb
+volumes:
+  data-volume:
+     external:
+      name: my_mongodb
