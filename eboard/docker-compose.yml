@@ -13,7 +13,7 @@ services:
     networks: 
       - my-network
     ports:
-      - 8080:8080 # Replace the port of your application here if used
+      - 8080:8080 
     depends_on: 
       - db
   db:
@@ -23,8 +23,21 @@ services:
       - data-volume:/data/db
     networks: 
       - my-network
-    ports:
-      - 27017:27017 
+    expose:
+      - "27017"
+  mongo-express:
+     image: mongo-express
+     container_name: mongo-express
+     environment:
+       ME_CONFIG_MONGODB_ENABLE_ADMIN: false
+       ME_CONFIG_MONGODB_PORT: 27017
+       ME_CONFIG_MONGODB_SERVER: mongodb
+     networks: 
+      - my-network
+     ports:
+      - 8081:8081
+     depends_on: 
+      - db
 networks:
   my-network:
     external:
