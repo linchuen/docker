@@ -1,43 +1,61 @@
 version: "3.4"
 services:
   app:
-    # replace imageName with your image name (block in your case)
-    image: eboard
+    build:
+      context: .
+      dockerfile: eboard.dockerfile
     container_name: eboard
     environment:
       WEB_FORMAL-URL: 127.0.0.1
       WEB_UPLOAD-PATH: /web/storage/
       SPRING_DATA_MONGODB_HOST: mongodb
+      #SPRING_DATA_MONGODB_USERNAME: root
+      #SPRING_DATA_MONGODBL_PASSWORD: example
       SPRING_MAIL_USERNAME: ${USERNAME}
       SPRING_MAIL_PASSWORD: ${PASSWORD}
+      SPRING_RABBITMQ_HOST: myrabbitmq
     networks: 
       - my-network
     ports:
-      - 8080:8080 
+      - 80:8080 
     depends_on: 
       - db
   db:
     image: mongo
     container_name: mongodb
+    #environment:
+      #MONGO_INITDB_ROOT_USERNAME: root
+      #MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - data-volume:/data/db
     networks: 
       - my-network
     expose:
-      - "27017"
+      - 27017
   mongo-express:
      image: mongo-express
      container_name: mongo-express
      environment:
+       #ME_CONFIG_MONGODB_ADMINUSERNAME: root
+       #ME_CONFIG_MONGODB_ADMINPASSWORD: example
        ME_CONFIG_MONGODB_ENABLE_ADMIN: false
        ME_CONFIG_MONGODB_PORT: 27017
        ME_CONFIG_MONGODB_SERVER: mongodb
+       ME_CONFIG_MONGODB_AUTH_DATABASE: eboard
      networks: 
       - my-network
      ports:
       - 8081:8081
      depends_on: 
       - db
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: myrabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+    networks:
+        - my-network
 networks:
   my-network:
     external:
