@@ -1,0 +1,30 @@
+concurrent = 1
+check_interval = 0
+connection_max_age = "15m0s"
+shutdown_timeout = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "work"
+  url = "https://gitlab.com/"
+  id = 32919922
+  token = "glrt-B8qUHQAFWq1z3j2A2S2J"
+  token_obtained_at = 2024-02-20T07:24:31Z
+  token_expires_at = 0001-01-01T00:00:00Z
+  executor = "docker"
+  [runners.cache]
+    MaxUploadedArchiveSize = 0
+    Insecure = false
+  [runners.docker]
+    image = "docker:24.0.5"
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    tls_verify = false
+    privileged = true
+    disable_cache = false
+    volumes = ["/cache"]
+    shm_size = 0
+    network_mtu = 0
+    pull_policy = "if-not-present"

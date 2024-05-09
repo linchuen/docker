@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  mysql-master:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data:/bitnami/mysql/data
+      - ./master-cnf:/opt/bitnami/mysql/conf
+    environment:
+      - MYSQL_REPLICATION_MODE=master
+      - MYSQL_REPLICATION_USER=slave
+      - MYSQL_REPLICATION_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_DATABASE=main
+  mysql-slave:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - "3308:3306"
+    depends_on:
+      - mysql-master
+    volumes:
+      - ./slave-cnf:/opt/bitnami/mysql/conf
+    environment:
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=slave
+      - MYSQL_REPLICATION_PASSWORD=123456
+      - MYSQL_MASTER_HOST=mysql-master
+      - MYSQL_MASTER_PORT_NUMBER=3306
+      - MYSQL_MASTER_ROOT_PASSWORD=root
