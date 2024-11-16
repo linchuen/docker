@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  nacos:
+    image: nacos/nacos-server:v2.2.2
+    container_name: nacos
+    restart: always
+    environment:
+      - MODE=standalone
+      # 使用 mysql 作为数据库
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=127.0.0.1
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root
+      # 设置连接 mysql 的连接参数
+      - MYSQL_DB_PARAM="characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=Asia/Shanghai"
+    volumes:
+      - /logs:/home/nacos/logs
+    network_mode: host
