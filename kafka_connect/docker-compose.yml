@@ -46,12 +46,10 @@ services:
       STATUS_STORAGE_TOPIC: debezium-connect-status
     depends_on:
       - kafka
-      - mysql
+      - db
 
-  mysql:
-    build:
-      context: .
-      dockerfile: sql.dockerfile
+  db:
+    image: bitnami/mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example

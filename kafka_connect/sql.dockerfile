@@ -1,3 +1,3 @@
-FROM bitnami/mysql:9.0.1
+FROM bitnami/mysql:8.0
 
 COPY ./scripts /docker-entrypoint-initdb.d
