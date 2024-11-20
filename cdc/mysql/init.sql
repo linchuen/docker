@@ -13,7 +13,7 @@ CREATE TABLE `order` (
   KEY `create_time_IDX` (`create_time`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='order sync';
 
-INSERT INTO `source`
+INSERT INTO `order`
 (order_id, sync, create_time, trans_no)
 VALUES
 (RAND(), 0, NOW(), UUID());
