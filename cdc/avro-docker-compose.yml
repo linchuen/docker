@@ -1,8 +1,5 @@
 version: "3.7"
 services:
-  apicurio:
-    image: apicurio/apicurio-registry-mem:2.6.2.Final
-
   zookeeper:
     image: 'bitnami/zookeeper:3.9'
     ports:
