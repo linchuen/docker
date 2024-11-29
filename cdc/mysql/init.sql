@@ -18,5 +18,8 @@ INSERT INTO `order`
 VALUES
 (RAND(), 0, NOW(), UUID());
 
+CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT NULL, data VARCHAR(2048) NULL);
+
 create database target;
+create database storage;
 
