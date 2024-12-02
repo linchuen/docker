@@ -31,15 +31,15 @@ kafka connect plugins:
     測試步驟
 1. 先執行 mysql 與 clickhouse 資料夾的 init.sql  
 ![db建立畫面](img/db-init.png)
-2. 執行 curl 資料夾的 mysql_source 並執行 mysql_source_status 檢查狀態是否正常
+2. 執行 curl 資料夾的 mysql_source 並執行 mysql_source_status 檢查狀態是否正常  
 ![mysql狀態畫面](img/mysql-status.png)
-3. 執行 curl 資料夾的 clickhouse_source 並執行 clickhouse_source_status 檢查狀態是否正常
+3. 執行 curl 資料夾的 clickhouse_source 並執行 clickhouse_source_status 檢查狀態是否正常  
 ![clickhouse狀態畫面](img/clickhouse-status.png)
-4. 在 mysql 隨便插入一筆資料
+4. 在 mysql 隨便插入一筆資料  
 ![插入畫面](img/insert.png)
-5. 查看 kafka topic 是否收到資料
+5. 查看 kafka topic 是否收到資料  
 ![topic畫面](img/topic.png)
-6. 查看 clickhouse 是否同步資料
+6. 查看 clickhouse 是否同步資料  
 ![複製畫面](img/compare.png)
 
 ## kafka connect REST簡介

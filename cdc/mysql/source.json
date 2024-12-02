@@ -10,15 +10,13 @@
         "database.server.id": "1",
         "topic.prefix": "test",
         "database.include.list": "source",
+        "signal.data.collection": "source.debezium_signal",
         "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
         "schema.history.internal.kafka.topic": "schema-changes.cdc",
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": "false",
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",
         "value.converter.schemas.enable": "false",
-        "include.schema.changes": "false",
-        "transforms": "ExtractField",
-        "transforms.ExtractField.type": "org.apache.kafka.connect.transforms.ExtractField$Value",
-        "transforms.ExtractField.field": "after"
+        "include.schema.changes": "false"
     }
 }

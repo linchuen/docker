@@ -20,6 +20,9 @@
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": "false",
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-        "value.converter.schemas.enable": "false"
+        "value.converter.schemas.enable": "false",
+        "transforms": "ExtractField",
+        "transforms.ExtractField.type": "org.apache.kafka.connect.transforms.ExtractField$Value",
+        "transforms.ExtractField.field": "after"
     }
 }
