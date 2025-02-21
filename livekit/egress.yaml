@@ -1,0 +1,5 @@
+log_level: debug
+insecure: true
+enable_chrome_sandbox: true
+redis:
+  address: redis:6379

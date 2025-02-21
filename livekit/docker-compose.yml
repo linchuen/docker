@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  livekit:
+    image: livekit/livekit-server
+    container_name: livekit
+    restart: always
+    ports:
+      - "7880:7880"   
+      - "7881:7881"    
+      - "7882:7882/udp" 
+    volumes:
+      - ./livekit.yaml:/livekit.yaml
+    command: ["--config", "/livekit.yaml"]
+
+  egress:
+    image: livekit/egress
+    container_name: livekit-egress
+    restart: always
+    depends_on:
+      - livekit
+    volumes:
+      - ./egress.yaml:/egress.yaml
+      - ./recordings:/recordings 
+    environment:
+      - LIVEKIT_API_KEY=APIGPW3gnFTzqHH
+      - LIVEKIT_API_SECRET=23ztfSqsfQ8hKkHzHTl3Z4bvaxro0snjk5jwbp5p6Q3
+      - LIVEKIT_WS_URL=ws://livekit:7880
+      - EGRESS_CONFIG_FILE=/egress.yaml
+      - EGRESS_API_PORT=8080
+      - EGRESS_DEFAULT_TEMPLATE=composite-grid
+      - EGRESS_DIRECTORY=/recordings
+    # security_opt:
+    #   - seccomp=chrome-sandboxing-seccomp-profile.json
+
+  redis:
+    image: redis
+    container_name: livekit-redis
+    restart: always
+    ports:
+      - "26379:6379" 
+
